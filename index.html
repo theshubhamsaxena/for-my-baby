@@ -133,7 +133,7 @@ body.locked {
   position: relative;
   width: min(100%, 760px);
   margin: auto;
-  padding: 45px 30px;
+  
 
   background: rgba(255, 255, 255, .82);
   border: 1px solid rgba(255, 255, 255, .95);
@@ -480,9 +480,15 @@ body.locked {
 <div class="container">
 <h2>A few reasons you have my whole heart 📸</h2>
 <div class="photo-grid">
-<div class="photo" style="--r:-2deg"><div class="placeholder"><span>📷</span><b>YOUR PHOTO 1</b><small>Add: photo1.jpg</small></div><div class="caption">“Look at my baby 😭❤️”</div></div>
-<div class="photo" style="--r:2deg"><div class="placeholder"><span>📷</span><b>YOUR PHOTO 2</b><small>Add: photo2.jpg</small></div><div class="caption">“Okay, this one is unfairly cute.”</div></div>
-<div class="photo" style="--r:-1deg"><div class="placeholder"><span>📷</span><b>YOUR PHOTO 3</b><small>Add: photo3.jpg</small></div><div class="caption">“I definitely stared at this too long.”</div></div>
+<div class="photo" style="--r:-2deg">
+<img src="photos/photo1.jpeg" alt="My baby ❤️">
+<div class="caption">“Look at my baby 😭❤️”</div></div>
+<div class="photo" style="--r:2deg">
+<img src="photos/photo2.jpeg" alt="My favorite person ❤️">
+<div class="caption">“Okay, this one is unfairly cute.”</div></div>
+<div class="photo" style="--r:-1deg">
+<img src="photos/photo3.jpeg" alt="A beautiful memory ❤️">
+<div class="caption">“I definitely stared at this too long.”</div></div>
 </div>
 <button class="primary" style="margin-top:35px" onclick="go('reasons')">There is more? →</button>
 </div>
@@ -940,7 +946,8 @@ function sayYes() {
     document.querySelector(".yes-button");
 
   yesButton.style.transform =
-    "translate(-115%, -50%) scale(1.2)";
+  "translate(calc(-100% - 8px), -50%) scale(1.2)";
+
 
   setTimeout(function() {
 
