@@ -100,6 +100,221 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
 @keyframes musicPulse{50%{transform:scale(1.12);opacity:.3}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
 
+/* ===== Wedding / Proposal Section ===== */
+
+.wedding {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 20%, #fff 0%, #fff2f7 35%, #ffdce9 100%);
+  color: var(--ink);
+}
+
+.wedding .container {
+  position: relative;
+  z-index: 2;
+}
+
+.wedding-card {
+  position: relative;
+  width: min(100%, 760px);
+  margin: auto;
+  padding: 45px 30px;
+  background: rgba(255, 255, 255, .82);
+  border: 1px solid rgba(255, 255, 255, .95);
+  border-radius: 35px;
+  box-shadow: 0 25px 80px rgba(143, 54, 87, .14);
+  backdrop-filter: blur(12px);
+  text-align: center;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.wedding-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 85px rgba(237, 95, 150, .20);
+}
+
+.wedding-ring {
+  font-size: 4rem;
+  margin-bottom: 10px;
+  animation: ringFloat 3s ease-in-out infinite;
+}
+
+@keyframes ringFloat {
+  50% {
+    transform: translateY(-10px) rotate(8deg);
+  }
+}
+
+.year {
+  display: inline-block;
+  padding: 8px 15px;
+  border-radius: 999px;
+  background: #fff0f6;
+  color: var(--hot);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.wedding h2 {
+  margin-top: 18px;
+  color: var(--hot);
+}
+
+.wedding h3 {
+  color: var(--ink);
+}
+
+.wedding-buttons {
+  position: relative;
+  height: 190px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.yes-button {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(135deg, #ed5f96, #ff4085);
+  color: white;
+  padding: 17px 32px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  box-shadow: 0 12px 30px #ed5f9635;
+  transition: transform .25s, box-shadow .25s;
+}
+
+.yes-button:hover {
+  transform: scale(1.12) rotate(-2deg);
+  box-shadow: 0 18px 40px #ed5f9660;
+}
+
+.no-button {
+  position: absolute;
+  left: calc(50% + 120px);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+
+  background: white;
+  color: var(--hot);
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  white-space: nowrap;
+
+  box-shadow: 0 8px 25px #ed5f9620;
+
+  transition:
+    left .18s cubic-bezier(.2,.8,.3,1),
+    top .18s cubic-bezier(.2,.8,.3,1),
+    transform .2s,
+    box-shadow .2s;
+}
+
+.no-button:hover {
+  transform: translate(-50%, -50%) rotate(-5deg) scale(1.05);
+}
+
+.no-button.running {
+  animation: buttonPanic .25s ease;
+}
+
+@keyframes buttonPanic {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  35% {
+    transform: translate(-50%, -50%) scale(.8) rotate(8deg);
+  }
+
+  70% {
+    transform: translate(-50%, -50%) scale(1.08) rotate(-8deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.wedding-result {
+  min-height: 38px;
+  margin-top: 10px;
+  color: var(--hot);
+  font-weight: 700;
+}
+
+.proposal-heart {
+  position: absolute;
+  z-index: 1;
+  font-size: 2rem;
+  opacity: .65;
+  animation: proposalFloat 4s ease-in-out infinite;
+}
+
+.ph1 {
+  left: 10%;
+  top: 18%;
+}
+
+.ph2 {
+  right: 12%;
+  top: 25%;
+  animation-delay: .8s;
+}
+
+.ph3 {
+  left: 15%;
+  bottom: 18%;
+  animation-delay: 1.5s;
+}
+
+.ph4 {
+  right: 15%;
+  bottom: 12%;
+  animation-delay: 2.2s;
+}
+
+@keyframes proposalFloat {
+  50% {
+    transform: translateY(-18px) rotate(8deg);
+  }
+}
+
+@media (max-width: 700px) {
+
+  .wedding {
+    padding: 65px 16px;
+  }
+
+  .wedding-card {
+    padding: 35px 20px;
+    border-radius: 28px;
+  }
+
+  .wedding-buttons {
+    height: 230px;
+  }
+
+  .yes-button {
+    padding: 15px 25px;
+  }
+
+  .no-button {
+    left: calc(50% + 95px);
+  }
+
+  .proposal-heart {
+    font-size: 1.5rem;
+  }
+}
+
 /* ===== Extra Interactive Proposal ===== */
 
 .wedding-buttons {
@@ -466,123 +681,138 @@ const teasingMessages = [
   "JUST SAY YES ALREADY. ❤️"
 ];
 
-/* Move BEFORE she gets a chance to click */
 function dodgeButton() {
 
   const now = Date.now();
 
-  /* Prevent multiple mouse events firing together */
   if (now - lastMove < 120) return;
 
   lastMove = now;
   noAttempts++;
 
-  const container = weddingButtons.getBoundingClientRect();
-  const button = noButton.getBoundingClientRect();
+  const container =
+    weddingButtons.getBoundingClientRect();
+
+  const button =
+    noButton.getBoundingClientRect();
 
   const padding = 10;
 
   const maxX =
-    (container.width - button.width) / 2 - padding;
+    Math.max(
+      20,
+      (container.width - button.width) / 2 - padding
+    );
 
   const maxY =
-    (container.height - button.height) / 2 - padding;
+    Math.max(
+      20,
+      (container.height - button.height) / 2 - padding
+    );
 
-  /*
-   * Keep the button away from the YES button.
-   * Random positions are generated until one is
-   * reasonably far away.
-   */
-  let x, y;
+  let x = 0;
+  let y = 0;
 
-  for (let i = 0; i < 20; i++) {
+  /* Find a position away from YES */
+  for (let i = 0; i < 30; i++) {
 
     x = (Math.random() * 2 - 1) * maxX;
     y = (Math.random() * 2 - 1) * maxY;
 
-    /* Don't put NO directly over YES */
-    if (Math.abs(x) > 70 || Math.abs(y) > 45) {
+    if (Math.abs(x) > 80 || Math.abs(y) > 55) {
       break;
     }
   }
 
-  noButton.style.left = `calc(50% + ${x}px)`;
-  noButton.style.top = `calc(50% + ${y}px)`;
+  noButton.style.left =
+    `calc(50% + ${x}px)`;
+
+  noButton.style.top =
+    `calc(50% + ${y}px)`;
 
   noButton.classList.remove('running');
 
-  /* Restart animation */
   void noButton.offsetWidth;
 
   noButton.classList.add('running');
 
   weddingResult.textContent =
     teasingMessages[
-      Math.min(noAttempts - 1, teasingMessages.length - 1)
+      Math.min(
+        noAttempts - 1,
+        teasingMessages.length - 1
+      )
     ];
 
-  /* Tiny heart burst */
-  burst(noAttempts % 3 === 0 ? 12 : 5);
+  if (typeof burst === 'function') {
+    burst(noAttempts % 3 === 0 ? 12 : 5);
+  }
 }
 
 
-/*
- * Desktop:
- * As soon as the cursor enters the button,
- * it runs away.
- */
-noButton.addEventListener('mouseenter', dodgeButton);
+/* Desktop: run away when mouse reaches it */
+if (noButton) {
 
-
-/*
- * Extra challenge:
- * If the cursor gets VERY close to it,
- * move it again.
- */
-weddingButtons.addEventListener('mousemove', (event) => {
-
-  const buttonRect = noButton.getBoundingClientRect();
-
-  const distanceX =
-    event.clientX -
-    (buttonRect.left + buttonRect.width / 2);
-
-  const distanceY =
-    event.clientY -
-    (buttonRect.top + buttonRect.height / 2);
-
-  const distance = Math.sqrt(
-    distanceX * distanceX +
-    distanceY * distanceY
+  noButton.addEventListener(
+    'mouseenter',
+    dodgeButton
   );
 
-  if (distance < 65) {
-    dodgeButton();
-  }
-});
+  /* Extra protection when cursor gets close */
+  weddingButtons.addEventListener(
+    'mousemove',
+    (event) => {
 
+      const rect =
+        noButton.getBoundingClientRect();
 
-/*
- * Mobile:
- * Touching the button makes it escape.
- */
-noButton.addEventListener(
-  'touchstart',
-  (event) => {
-    event.preventDefault();
-    dodgeButton();
-  },
-  { passive: false }
-);
+      const centerX =
+        rect.left + rect.width / 2;
 
+      const centerY =
+        rect.top + rect.height / 2;
 
-/*
- * Just in case she somehow manages to click it.
- */
-noButton.addEventListener('click', (event) => {
-  event.preventDefault();
-  dodgeButton();
-});
+      const distanceX =
+        event.clientX - centerX;
+
+      const distanceY =
+        event.clientY - centerY;
+
+      const distance =
+        Math.sqrt(
+          distanceX * distanceX +
+          distanceY * distanceY
+        );
+
+      if (distance < 65) {
+        dodgeButton();
+      }
+    }
+  );
+
+  /* Mobile */
+  noButton.addEventListener(
+    'touchstart',
+    (event) => {
+
+      event.preventDefault();
+      dodgeButton();
+
+    },
+    { passive: false }
+  );
+
+  /* If somehow clicked */
+  noButton.addEventListener(
+    'click',
+    (event) => {
+
+      event.preventDefault();
+      dodgeButton();
+
+    }
+  );
+}
 
 
 /* YES button */
@@ -593,16 +823,20 @@ function sayYes() {
 
   noButton.style.display = 'none';
 
-  burst(60);
+  if (typeof burst === 'function') {
+    burst(60);
+  }
 
-  /* Make the YES button celebrate */
   const yesButton =
     document.querySelector('.yes-button');
 
-  yesButton.style.transform = 'scale(1.2)';
+  yesButton.style.transform =
+    'scale(1.2)';
 
   setTimeout(() => {
+
     go('surprise');
+
   }, 1600);
 }
 </script>
