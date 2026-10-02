@@ -8,14 +8,17 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Pacifico&display=swap');
 :root{--pink:#f59abb;--hot:#ed5f96;--cream:#fffaf7;--ink:#3b2630;--soft:#ffe9f1;--rose:#fff1f5;--gold:#f2c98b}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
+* {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 20px;
 }
 
 body {
   margin: 0;
+  min-height: 100vh;
   background: var(--cream);
   color: var(--ink);
   font-family: "DM Sans", sans-serif;
@@ -78,6 +81,10 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
   transition: opacity .7s, visibility .7s;
 }
 
+body.locked {
+  overflow: hidden;
+}
+
 .opening.hide {
   opacity: 0;
   visibility: hidden;
@@ -107,13 +114,19 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 20%, #fff 0%, #fff2f7 35%, #ffdce9 100%);
+    radial-gradient(
+      circle at 50% 20%,
+      #fff 0%,
+      #fff2f7 35%,
+      #ffdce9 100%
+    );
   color: var(--ink);
 }
 
 .wedding .container {
   position: relative;
   z-index: 2;
+  width: min(100%, 1000px);
 }
 
 .wedding-card {
@@ -121,18 +134,15 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
   width: min(100%, 760px);
   margin: auto;
   padding: 45px 30px;
+
   background: rgba(255, 255, 255, .82);
   border: 1px solid rgba(255, 255, 255, .95);
   border-radius: 35px;
+
   box-shadow: 0 25px 80px rgba(143, 54, 87, .14);
   backdrop-filter: blur(12px);
-  text-align: center;
-  transition: transform .3s ease, box-shadow .3s ease;
-}
 
-.wedding-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 30px 85px rgba(237, 95, 150, .20);
+  text-align: center;
 }
 
 .wedding-ring {
@@ -167,58 +177,113 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
   color: var(--ink);
 }
 
+
+/* =========================
+   PROPOSAL BUTTON AREA
+   ========================= */
+
 .wedding-buttons {
   position: relative;
+
+  width: 100%;
   height: 190px;
+
   margin-top: 30px;
+
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
+  /* IMPORTANT */
+  overflow: hidden;
+
+  border-radius: 25px;
 }
 
+
+/* YES */
+
 .yes-button {
-  position: relative;
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-115%, -50%);
+
   z-index: 2;
-  background: linear-gradient(135deg, #ed5f96, #ff4085);
+
+  background: linear-gradient(
+    135deg,
+    #ed5f96,
+    #ff4085
+  );
+
   color: white;
+
   padding: 17px 32px;
+
   border-radius: 999px;
+
   font-weight: 700;
   font-size: 1.05rem;
-  box-shadow: 0 12px 30px #ed5f9635;
-  transition: transform .25s, box-shadow .25s;
+
+  box-shadow:
+    0 12px 30px #ed5f9635;
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
 }
 
 .yes-button:hover {
-  transform: scale(1.12) rotate(-2deg);
-  box-shadow: 0 18px 40px #ed5f9660;
+  transform:
+    translate(-115%, -50%)
+    scale(1.08)
+    rotate(-2deg);
+
+  box-shadow:
+    0 18px 40px #ed5f9660;
 }
+
+
+/* NO */
 
 .no-button {
   position: absolute;
-  left: calc(50% + 120px);
+
+  left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+
+  transform: translate(15%, -50%);
+
   z-index: 5;
 
   background: white;
   color: var(--hot);
+
   padding: 14px 22px;
+
   border-radius: 999px;
+
   font-weight: 700;
   white-space: nowrap;
 
-  box-shadow: 0 8px 25px #ed5f9620;
+  box-shadow:
+    0 8px 25px #ed5f9620;
 
   transition:
     left .18s cubic-bezier(.2,.8,.3,1),
     top .18s cubic-bezier(.2,.8,.3,1),
-    transform .2s,
-    box-shadow .2s;
+    transform .2s ease,
+    box-shadow .2s ease;
 }
 
 .no-button:hover {
-  transform: translate(-50%, -50%) rotate(-5deg) scale(1.05);
+  transform:
+    translate(15%, -50%)
+    rotate(-5deg)
+    scale(1.05);
 }
 
 .no-button.running {
@@ -226,36 +291,63 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
 }
 
 @keyframes buttonPanic {
+
   0% {
-    transform: translate(-50%, -50%) scale(1);
+    transform:
+      translate(15%, -50%)
+      scale(1);
   }
 
   35% {
-    transform: translate(-50%, -50%) scale(.8) rotate(8deg);
+    transform:
+      translate(15%, -50%)
+      scale(.8)
+      rotate(8deg);
   }
 
   70% {
-    transform: translate(-50%, -50%) scale(1.08) rotate(-8deg);
+    transform:
+      translate(15%, -50%)
+      scale(1.08)
+      rotate(-8deg);
   }
 
   100% {
-    transform: translate(-50%, -50%) scale(1);
+    transform:
+      translate(15%, -50%)
+      scale(1);
   }
 }
 
+
 .wedding-result {
   min-height: 38px;
+
   margin-top: 10px;
+
   color: var(--hot);
+
   font-weight: 700;
 }
 
+
+/* =========================
+   FLOATING HEARTS
+   ========================= */
+
 .proposal-heart {
   position: absolute;
+
   z-index: 1;
+
   font-size: 2rem;
+
   opacity: .65;
-  animation: proposalFloat 4s ease-in-out infinite;
+
+  pointer-events: none;
+
+  animation:
+    proposalFloat 4s ease-in-out infinite;
 }
 
 .ph1 {
@@ -282,10 +374,18 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
 }
 
 @keyframes proposalFloat {
+
   50% {
-    transform: translateY(-18px) rotate(8deg);
+    transform:
+      translateY(-18px)
+      rotate(8deg);
   }
 }
+
+
+/* =========================
+   MOBILE
+   ========================= */
 
 @media (max-width: 700px) {
 
@@ -304,10 +404,16 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
 
   .yes-button {
     padding: 15px 25px;
+
+    transform:
+      translate(-110%, -50%);
   }
 
   .no-button {
-    left: calc(50% + 95px);
+    padding: 13px 18px;
+
+    transform:
+      translate(10%, -50%);
   }
 
   .proposal-heart {
@@ -315,102 +421,10 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
   }
 }
 
-/* ===== Extra Interactive Proposal ===== */
-
-.wedding-buttons {
-  position: relative;
-  height: 190px;
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.yes-button {
-  position: relative;
-  background: linear-gradient(135deg, #ed5f96, #ff4085);
-  color: white;
-  padding: 17px 32px;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 1.05rem;
-  box-shadow: 0 12px 30px #ed5f9635;
-  transition: transform .25s, box-shadow .25s;
-  z-index: 2;
-}
-
-.yes-button:hover {
-  transform: scale(1.12) rotate(-2deg);
-  box-shadow: 0 18px 40px #ed5f9660;
-}
-
-.no-button {
-  position: absolute;
-  left: calc(50% + 120px);
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  color: var(--hot);
-  padding: 14px 22px;
-  border-radius: 999px;
-  font-weight: 700;
-  box-shadow: 0 8px 25px #ed5f9620;
-  white-space: nowrap;
-  z-index: 5;
-
-  /* Smooth movement */
-  transition:
-    left .18s cubic-bezier(.2,.8,.3,1),
-    top .18s cubic-bezier(.2,.8,.3,1),
-    transform .2s,
-    box-shadow .2s;
-}
-
-.no-button:hover {
-  transform: translate(-50%, -50%) rotate(-5deg) scale(1.05);
-  box-shadow: 0 14px 35px #ed5f9640;
-}
-
-/* Little "panic" animation */
-.no-button.running {
-  animation: buttonPanic .25s ease;
-}
-
-@keyframes buttonPanic {
-  0% { transform:translate(-50%,-50%) scale(1); }
-  35% { transform:translate(-50%,-50%) scale(.8) rotate(8deg); }
-  70% { transform:translate(-50%,-50%) scale(1.08) rotate(-8deg); }
-  100% { transform:translate(-50%,-50%) scale(1); }
-}
-
-.wedding-result {
-  min-height: 38px;
-  margin-top: 10px;
-  color: var(--hot);
-  font-weight: 700;
-  transition: .25s;
-}
-
-/* Make the proposal card react */
-.wedding-card {
-  transition: transform .3s ease, box-shadow .3s ease;
-}
-
-.wedding-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 30px 85px #ed5f9630;
-}
-
-@media(max-width:700px) {
-  .wedding-buttons {
-    height: 230px;
-  }
-}
-
 
 </style>
 </head>
-<body>
+<body class="locked">
 <div class="opening" id="opening">
   <div class="opening-card">
     <div class="opening-kicker"><span class="sparkle">✦</span> a tiny birthday surprise <span class="sparkle">✦</span></div>
@@ -425,7 +439,7 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
 <div id="hearts"></div>
 <button class="music" id="musicBtn" aria-label="Toggle music">♫</button>
 
-<section class="hero">
+<section class="hero" id="hero">
 <div class="floating f1">💗</div><div class="floating f2">🎀</div><div class="floating f3">✨</div><div class="floating f4">🧸</div>
 <div class="container">
 <div class="badge">A tiny internet corner made just for you 🥺</div>
@@ -465,7 +479,6 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
 <section class="memories" id="memories">
 <div class="container">
 <h2>A few reasons you have my whole heart 📸</h2>
-<p class="sub">Replace these three placeholders with your favorite pictures of her/us.</p>
 <div class="photo-grid">
 <div class="photo" style="--r:-2deg"><div class="placeholder"><span>📷</span><b>YOUR PHOTO 1</b><small>Add: photo1.jpg</small></div><div class="caption">“Look at my baby 😭❤️”</div></div>
 <div class="photo" style="--r:2deg"><div class="placeholder"><span>📷</span><b>YOUR PHOTO 2</b><small>Add: photo2.jpg</small></div><div class="caption">“Okay, this one is unfairly cute.”</div></div>
@@ -509,14 +522,9 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
 
       <p class="sub">
         Just a tiny reminder that next year I'm officially upgrading you
-        from <b>my baby</b> to <b>my wife</b>. 😌💍
+        from <b>my baby</b> to <b>MY WIFE</b>. 😌💍 <br> Which means I have one very important question...
       </p>
-
-      <p>
-        Which means I have one very important question...
-      </p>
-
-      <h3 style="font-size:1.7rem;margin-top:25px;">
+      <h3 style="font-size:1.7rem;">
         Are you ready to marry me? 🥺
       </h3>
 
@@ -575,15 +583,23 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
 function go(id) {
   const target = document.getElementById(id);
 
-  if (!target) return;
+  if (!target) {
+    console.error("Section not found:", id);
+    return;
+  }
 
-  target.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
+  const y =
+    target.getBoundingClientRect().top +
+    window.scrollY;
+
+  window.scrollTo({
+    top: y,
+    behavior: "smooth"
   });
 
   burst();
 }
+
 
 function answer(msg) {
   document.getElementById('reply').textContent = msg;
@@ -644,10 +660,16 @@ async function startMusic(){
   musicBtn.textContent='♫';
  }
 }
-startLove.addEventListener('click',async()=>{
- opening.classList.add('hide');
- burst(28);
- await startMusic();
+startLove.addEventListener("click", async function() {
+
+  opening.classList.add("hide");
+
+  document.body.classList.remove("locked");
+
+  burst(28);
+
+  await startMusic();
+
 });
 musicBtn.addEventListener('click',async()=>{
  if(song.paused){await startMusic();}
@@ -714,160 +736,219 @@ function dodgeButton() {
 
   const now = Date.now();
 
-  if (now - lastMove < 120) return;
+  if (now - lastMove < 150) {
+    return;
+  }
 
   lastMove = now;
   noAttempts++;
 
-  const container =
+  const containerRect =
     weddingButtons.getBoundingClientRect();
 
-  const button =
+  const buttonRect =
     noButton.getBoundingClientRect();
 
-  const padding = 10;
 
+  /*
+   * Maximum movement from the CENTER
+   */
   const maxX =
     Math.max(
-      20,
-      (container.width - button.width) / 2 - padding
+      25,
+      (containerRect.width - buttonRect.width) / 2 - 20
     );
 
   const maxY =
     Math.max(
-      20,
-      (container.height - button.height) / 2 - padding
+      25,
+      (containerRect.height - buttonRect.height) / 2 - 20
     );
 
-  let x = 0;
-  let y = 0;
 
-  /* Find a position away from YES */
+  let x;
+  let y;
+
+
+  /*
+   * Pick a random position.
+   * Avoid keeping it too close to YES.
+   */
   for (let i = 0; i < 30; i++) {
 
-    x = (Math.random() * 2 - 1) * maxX;
-    y = (Math.random() * 2 - 1) * maxY;
+    x =
+      (Math.random() * 2 - 1) *
+      maxX;
 
-    if (Math.abs(x) > 80 || Math.abs(y) > 55) {
+    y =
+      (Math.random() * 2 - 1) *
+      maxY;
+
+
+    if (
+      Math.abs(x) > 70 ||
+      Math.abs(y) > 50
+    ) {
       break;
     }
   }
 
+
+  /*
+   * Move the button.
+   */
   noButton.style.left =
     `calc(50% + ${x}px)`;
 
   noButton.style.top =
     `calc(50% + ${y}px)`;
 
-  noButton.classList.remove('running');
+
+  /*
+   * Panic animation.
+   */
+  noButton.classList.remove("running");
 
   void noButton.offsetWidth;
 
-  noButton.classList.add('running');
+  noButton.classList.add("running");
+
+
+  /*
+   * Teasing message.
+   */
+  const messageIndex =
+    Math.min(
+      noAttempts - 1,
+      teasingMessages.length - 1
+    );
 
   weddingResult.textContent =
-    teasingMessages[
-      Math.min(
-        noAttempts - 1,
-        teasingMessages.length - 1
-      )
-    ];
+    teasingMessages[messageIndex];
 
-  if (typeof burst === 'function') {
-    burst(noAttempts % 3 === 0 ? 12 : 5);
-  }
+
+  /*
+   * Hearts.
+   */
+  burst(
+    noAttempts % 3 === 0
+      ? 12
+      : 5
+  );
 }
 
 
-/* Desktop: run away when mouse reaches it */
-if (noButton) {
 
+/* Desktop: run away when mouse reaches it */
+if (noButton && weddingButtons) {
+
+  /*
+   * Desktop
+   */
   noButton.addEventListener(
-    'mouseenter',
+    "mouseenter",
     dodgeButton
   );
 
-  /* Extra protection when cursor gets close */
+
+  /*
+   * Detect cursor getting close.
+   */
   weddingButtons.addEventListener(
-    'mousemove',
-    (event) => {
+    "mousemove",
+    function(event) {
 
       const rect =
         noButton.getBoundingClientRect();
 
       const centerX =
-        rect.left + rect.width / 2;
+        rect.left +
+        rect.width / 2;
 
       const centerY =
-        rect.top + rect.height / 2;
+        rect.top +
+        rect.height / 2;
 
-      const distanceX =
+      const dx =
         event.clientX - centerX;
 
-      const distanceY =
+      const dy =
         event.clientY - centerY;
 
       const distance =
         Math.sqrt(
-          distanceX * distanceX +
-          distanceY * distanceY
+          dx * dx +
+          dy * dy
         );
 
-      if (distance < 65) {
+
+      if (distance < 60) {
         dodgeButton();
       }
+
     }
   );
 
-  /* Mobile */
+
+  /*
+   * Mobile / touch
+   */
   noButton.addEventListener(
-    'touchstart',
-    (event) => {
+    "touchstart",
+    function(event) {
 
       event.preventDefault();
+
       dodgeButton();
 
     },
-    { passive: false }
+    {
+      passive: false
+    }
   );
 
-  /* If somehow clicked */
+
+  /*
+   * If somehow clicked.
+   */
   noButton.addEventListener(
-    'click',
-    (event) => {
+    "click",
+    function(event) {
 
       event.preventDefault();
+
       dodgeButton();
 
     }
   );
+
 }
+
 
 
 /* YES button */
 function sayYes() {
 
-  weddingResult.innerHTML =
+  weddingResult.textContent =
     "I KNEW IT! 🥹💍❤️ Future wife unlocked!";
 
-  noButton.style.display = 'none';
+  noButton.style.display = "none";
 
-  if (typeof burst === 'function') {
-    burst(60);
-  }
+  burst(60);
 
   const yesButton =
-    document.querySelector('.yes-button');
+    document.querySelector(".yes-button");
 
   yesButton.style.transform =
-    'scale(1.2)';
+    "translate(-115%, -50%) scale(1.2)";
 
-  setTimeout(() => {
+  setTimeout(function() {
 
-    go('surprise');
+    go("surprise");
 
   }, 1600);
 }
+
 </script>
 </body>
 </html>
