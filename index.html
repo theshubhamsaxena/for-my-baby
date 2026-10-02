@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Baby ❤️</title>
+<meta name="theme-color" content="#ff6fae">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Pacifico&display=swap');
+:root{--pink:#ff6fae;--hot:#ff3f8e;--cream:#fff8fb;--ink:#351c2a;--soft:#ffe5f0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:"DM Sans",sans-serif;overflow-x:hidden}
+button{font:inherit;cursor:pointer;border:0}
+section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:70px 20px;position:relative}
+.container{width:min(100%,1000px);margin:auto;text-align:center}
+.hero{background:radial-gradient(circle at 50% 25%,#fff 0,#fff0f6 38%,#ffd9e9 100%);overflow:hidden}
+.badge{display:inline-block;background:white;padding:9px 16px;border-radius:999px;box-shadow:0 8px 30px #ff77ab30;font-weight:700;font-size:.85rem}
+h1{font-family:Pacifico,cursive;font-size:clamp(3rem,10vw,7rem);line-height:1.05;margin:22px 0 10px;color:var(--hot)}
+h2{font-size:clamp(2rem,5vw,3.4rem);margin:0 0 14px}
+p{font-size:1.08rem;line-height:1.7}
+.sub{max-width:650px;margin:0 auto 28px}
+.primary,.secondary{padding:15px 24px;border-radius:999px;font-weight:700;transition:.2s;box-shadow:0 10px 25px #ff3f8e25}
+.primary{background:var(--hot);color:white}.secondary{background:white;color:var(--hot)}
+.primary:hover,.secondary:hover{transform:translateY(-3px)}
+.floating{position:absolute;animation:float 4s ease-in-out infinite;font-size:2rem;opacity:.8}
+.f1{left:8%;top:18%}.f2{right:9%;top:30%;animation-delay:1s}.f3{left:14%;bottom:20%;animation-delay:2s}.f4{right:14%;bottom:14%;animation-delay:.5s}
+@keyframes float{50%{transform:translateY(-18px) rotate(8deg)}}
+.story{background:white}.quiz{background:#fff0f6}.memories{background:#fff}.surprise{background:#ffe8f2}.letter{background:#2c1824;color:white}
+.cardgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.card{background:#fff;border-radius:26px;padding:28px 20px;min-height:190px;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 15px 45px #8f36571a;transition:.25s}
+.card:hover{transform:translateY(-6px) rotate(-1deg)}
+.card .emoji{font-size:2.5rem;margin-bottom:12px}.card strong{font-size:1.05rem}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.photo{aspect-ratio:1/1.15;border-radius:25px;background:linear-gradient(135deg,#ffd1e4,#fff);border:5px solid white;box-shadow:0 14px 35px #8f36571c;overflow:hidden;position:relative;transform:rotate(var(--r))}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo .placeholder{height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:20px;color:#a44b70}
+.photo .placeholder span{font-size:3rem}.photo .caption{position:absolute;left:10px;right:10px;bottom:10px;background:#ffffffdd;border-radius:15px;padding:8px;font-size:.8rem;font-weight:700}
+.option-wrap{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:28px 0}.answer{background:white;color:var(--hot);padding:14px 18px;border-radius:18px;font-weight:700;box-shadow:0 8px 20px #ff3f8e15}
+.answer:hover{transform:scale(1.03)}.reply{min-height:35px;font-weight:700;color:var(--hot)}
+.gift{width:180px;height:145px;margin:35px auto;position:relative;cursor:pointer;transition:.3s}.gift:hover{transform:scale(1.06)}
+.box{position:absolute;bottom:0;left:10px;width:160px;height:105px;background:#ff72a9;border-radius:10px;box-shadow:0 15px 30px #8f36572d}
+.lid{position:absolute;left:0;top:0;width:180px;height:45px;background:#ff4f96;border-radius:10px;z-index:2;transition:.7s}
+.ribbon-v{position:absolute;left:72px;top:0;width:35px;height:105px;background:#ffd7e7;z-index:3}.ribbon-h{position:absolute;left:10px;top:34px;width:160px;height:30px;background:#ffd7e7;z-index:3}
+.gift.open .lid{transform:translateY(-75px) rotate(-8deg)}
+.gift-note{display:none;background:white;color:var(--ink);padding:25px;border-radius:25px;max-width:500px;margin:20px auto;box-shadow:0 15px 45px #8f36571a}.gift-note.show{display:block;animation:pop .5s}
+@keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+.letterbox{background:#ffffff12;border:1px solid #ffffff20;border-radius:28px;padding:35px;max-width:720px;margin:30px auto;text-align:left}
+.letterbox p{font-size:1.1rem}.signature{font-family:Pacifico,cursive;color:#ff91be;font-size:2rem;text-align:right}
+#hearts{position:fixed;inset:0;pointer-events:none;z-index:99;overflow:hidden}
+.heart{position:absolute;font-size:22px;animation:fall 2.5s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
+.music{position:fixed;right:18px;bottom:18px;z-index:10;background:white;color:var(--hot);width:48px;height:48px;border-radius:50%;box-shadow:0 8px 25px #0002;font-size:1.2rem}
+footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size:.85rem}
+@media(max-width:700px){.cardgrid,.photo-grid{grid-template-columns:1fr}.card{min-height:150px}.letterbox{padding:24px}section{padding:65px 16px}.floating{font-size:1.5rem}}
+</style>
+</head>
+<body>
+<div id="hearts"></div>
+<button class="music" id="musicBtn" aria-label="Toggle music">♫</button>
+
+<section class="hero">
+<div class="floating f1">💗</div><div class="floating f2">🎀</div><div class="floating f3">✨</div><div class="floating f4">🧸</div>
+<div class="container">
+<div class="badge">A tiny internet corner made just for you 🥺</div>
+<h1>Happy Birthday,<br>Baby ❤️</h1>
+<p class="sub">I could have bought you a gift. Instead, I spent way too much time making this little thing. So yes… you have to explore all of it. 😌</p>
+<button class="primary" onclick="go('story')">Start the birthday adventure →</button>
+</div>
+</section>
+
+<section class="story" id="story">
+<div class="container">
+<h2>First things first… 👀</h2>
+<p class="sub">Before I let you continue, I need to settle something extremely important.</p>
+<div class="cardgrid">
+<div class="card"><div class="emoji">🥺</div><strong>You're ridiculously cute.</strong></div>
+<div class="card"><div class="emoji">😤</div><strong>You are also a little troublemaker.</strong></div>
+<div class="card"><div class="emoji">❤️</div><strong>And somehow, I love both.</strong></div>
+</div>
+<button class="primary" style="margin-top:30px" onclick="go('quiz')">Okay, what's next? →</button>
+</div>
+</section>
+
+<section class="quiz" id="quiz">
+<div class="container">
+<h2>Quick question, baby… 😌</h2>
+<p class="sub">How cute are you today?</p>
+<div class="option-wrap">
+<button class="answer" onclick="answer('Nice try. We both know the answer is EXTREMELY cute. 🥹')">Very cute 🥺</button>
+<button class="answer" onclick="answer('Correct. Someone give this girl a medal. 🏆')">Extremely cute 😌</button>
+<button class="answer" onclick="answer('Obviously. Finally, some self-awareness. 😂❤️')">Obviously. I'm your baby. 😏</button>
+</div>
+<div class="reply" id="reply"></div>
+<button class="primary" style="margin-top:30px" onclick="go('memories')">Show me the evidence →</button>
+</div>
+</section>
+
+<section class="memories" id="memories">
+<div class="container">
+<h2>Evidence that you're my favorite human 📸</h2>
+<p class="sub">Replace these three placeholders with your favorite pictures of her/us.</p>
+<div class="photo-grid">
+<div class="photo" style="--r:-2deg"><div class="placeholder"><span>📷</span><b>YOUR PHOTO 1</b><small>Add: photo1.jpg</small></div><div class="caption">“Look at my baby 😭❤️”</div></div>
+<div class="photo" style="--r:2deg"><div class="placeholder"><span>📷</span><b>YOUR PHOTO 2</b><small>Add: photo2.jpg</small></div><div class="caption">“Okay, this one is unfairly cute.”</div></div>
+<div class="photo" style="--r:-1deg"><div class="placeholder"><span>📷</span><b>YOUR PHOTO 3</b><small>Add: photo3.jpg</small></div><div class="caption">“I definitely stared at this too long.”</div></div>
+</div>
+<button class="primary" style="margin-top:35px" onclick="go('reasons')">There is more? →</button>
+</div>
+</section>
+
+<section class="story" id="reasons">
+<div class="container">
+<h2>Things I secretly love about you 💗</h2>
+<p class="sub">Okay, fine. They're not really secret.</p>
+<div class="cardgrid">
+<div class="card"><div class="emoji">😊</div><strong>Your smile</strong><p>It can change my entire mood.</p></div>
+<div class="card"><div class="emoji">😂</div><strong>Your random nonsense</strong><p>Somehow I never get tired of it.</p></div>
+<div class="card"><div class="emoji">🫶</div><strong>The way you care</strong><p>Even when you pretend you don't.</p></div>
+<div class="card"><div class="emoji">😤</div><strong>Your tiny tantrums</strong><p>Adorable. Don't argue with me.</p></div>
+<div class="card"><div class="emoji">🥰</div><strong>The way you are</strong><p>No explanation needed.</p></div>
+<div class="card"><div class="emoji">❤️</div><strong>Us</strong><p>My favorite part.</p></div>
+</div>
+<button class="primary" style="margin-top:30px" onclick="go('surprise')">I have one more thing… 🎁</button>
+</div>
+</section>
+
+<section class="surprise" id="surprise">
+<div class="container">
+<h2>Okay… actual surprise time. 🎁</h2>
+<p>Click the box. And don't cheat. 😌</p>
+<div class="gift" id="gift" onclick="openGift()">
+<div class="lid"></div><div class="box"></div><div class="ribbon-v"></div><div class="ribbon-h"></div>
+</div>
+<div class="gift-note" id="giftNote">
+<h3>Fine. You caught me. 🥹</h3>
+<p>I just wanted an excuse to remind you how special you are to me.</p>
+<button class="primary" onclick="go('letter')">One last thing ❤️</button>
+</div>
+</div>
+</section>
+
+<section class="letter" id="letter">
+<div class="container">
+<h2>Happy Birthday, Baby ❤️</h2>
+<div class="letterbox">
+<p>My baby,</p>
+<p>Happy birthday to the girl who somehow manages to be cute, annoying, funny, dramatic and completely irresistible — sometimes all at the same time. 😂</p>
+<p>I hope this year brings you everything you're wishing for, and a ridiculous amount of happiness. I hope you keep smiling that smile, keep being your crazy self, and keep letting me be a part of your little world.</p>
+<p>And if I get to make even a tiny contribution to those smiles, I'll consider myself pretty lucky.</p>
+<p>So here's to you, to us, to all the memories we've already made, and to all the ones we haven't made yet. ❤️</p>
+<p class="signature">Happy Birthday, baby. 🫶</p>
+</div>
+<p>Now stop scrolling and come get your birthday hug. 🫂</p>
+</div>
+</section>
+
+<footer>Made with an unreasonable amount of love ❤️</footer>
+
+<script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth'}); burst();}
+function answer(msg){document.getElementById('reply').textContent=msg; burst(12);}
+function openGift(){document.getElementById('gift').classList.add('open');document.getElementById('giftNote').classList.add('show');burst(35);}
+function burst(n=18){
+ const box=document.getElementById('hearts');
+ const emojis=['❤️','💗','💕','✨','🎀','🥰'];
+ for(let i=0;i<n;i++){
+  const h=document.createElement('div');h.className='heart';h.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+  h.style.left=Math.random()*100+'vw';h.style.top=(-5-Math.random()*15)+'vh';
+  h.style.animationDelay=Math.random()*.6+'s';h.style.fontSize=(16+Math.random()*22)+'px';
+  box.appendChild(h);setTimeout(()=>h.remove(),3200);
+ }
+}
+let audioCtx=null,playing=false;
+document.getElementById('musicBtn').onclick=()=>{
+ if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+ playing=!playing; document.getElementById('musicBtn').textContent=playing?'❚❚':'♫';
+ if(playing) playMelody();
+};
+function playMelody(){
+ if(!playing)return;
+ const notes=[261.63,329.63,392,329.63,293.66,349.23,440,392];
+ const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);
+ o.type='sine';let t=audioCtx.currentTime;
+ notes.forEach((f,i)=>{o.frequency.setValueAtTime(f,t+i*.25);g.gain.setValueAtTime(.0001,t+i*.25);g.gain.exponentialRampToValueAtTime(.045,t+i*.25+.02);g.gain.exponentialRampToValueAtTime(.0001,t+i*.25+.22)});
+ o.start();o.stop(t+2);setTimeout(playMelody,2000);
+}
+window.addEventListener('load',()=>setTimeout(()=>burst(12),500));
+</script>
+</body>
+</html>
