@@ -9,7 +9,20 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Pacifico&display=swap');
 :root{--pink:#f59abb;--hot:#ed5f96;--cream:#fffaf7;--ink:#3b2630;--soft:#ffe9f1;--rose:#fff1f5;--gold:#f2c98b}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--cream);color:var(--ink);font-family:"DM Sans",sans-serif;overflow-x:hidden;letter-spacing:.01em}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 20px;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+  letter-spacing: .01em;
+}
 button{font:inherit;cursor:pointer;border:0}
 section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:90px 20px;position:relative}
 .container{width:min(100%,1000px);margin:auto;text-align:center}
@@ -53,8 +66,23 @@ p{font-size:1.08rem;line-height:1.7}
 footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size:.85rem}
 @media(max-width:700px){.cardgrid,.photo-grid{grid-template-columns:1fr}.card{min-height:150px}.letterbox{padding:24px}section{padding:65px 16px}.floating{font-size:1.5rem}}
 
-.opening{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(145deg,#fff8fb,#ffe5ef);transition:opacity .7s,visibility .7s}
-.opening.hide{opacity:0;visibility:hidden;pointer-events:none}
+.opening {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(145deg, #fff8fb, #ffe5ef);
+  transition: opacity .7s, visibility .7s;
+}
+
+.opening.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 .opening-card{width:min(92vw,560px);padding:42px 28px;text-align:center;background:#ffffffdd;border:1px solid #ffffff;box-shadow:0 25px 80px #8f36571f;border-radius:36px;backdrop-filter:blur(10px)}
 .opening-kicker{font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#b86b88}
 .opening-card h2{font-family:Pacifico,cursive;font-size:clamp(2.3rem,8vw,4.2rem);color:var(--hot);margin:14px 0 8px}
@@ -71,6 +99,99 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
 .music::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid #ed5f9630;animation:musicPulse 2s infinite}
 @keyframes musicPulse{50%{transform:scale(1.12);opacity:.3}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+
+/* ===== Extra Interactive Proposal ===== */
+
+.wedding-buttons {
+  position: relative;
+  height: 190px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.yes-button {
+  position: relative;
+  background: linear-gradient(135deg, #ed5f96, #ff4085);
+  color: white;
+  padding: 17px 32px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  box-shadow: 0 12px 30px #ed5f9635;
+  transition: transform .25s, box-shadow .25s;
+  z-index: 2;
+}
+
+.yes-button:hover {
+  transform: scale(1.12) rotate(-2deg);
+  box-shadow: 0 18px 40px #ed5f9660;
+}
+
+.no-button {
+  position: absolute;
+  left: calc(50% + 120px);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  color: var(--hot);
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  box-shadow: 0 8px 25px #ed5f9620;
+  white-space: nowrap;
+  z-index: 5;
+
+  /* Smooth movement */
+  transition:
+    left .18s cubic-bezier(.2,.8,.3,1),
+    top .18s cubic-bezier(.2,.8,.3,1),
+    transform .2s,
+    box-shadow .2s;
+}
+
+.no-button:hover {
+  transform: translate(-50%, -50%) rotate(-5deg) scale(1.05);
+  box-shadow: 0 14px 35px #ed5f9640;
+}
+
+/* Little "panic" animation */
+.no-button.running {
+  animation: buttonPanic .25s ease;
+}
+
+@keyframes buttonPanic {
+  0% { transform:translate(-50%,-50%) scale(1); }
+  35% { transform:translate(-50%,-50%) scale(.8) rotate(8deg); }
+  70% { transform:translate(-50%,-50%) scale(1.08) rotate(-8deg); }
+  100% { transform:translate(-50%,-50%) scale(1); }
+}
+
+.wedding-result {
+  min-height: 38px;
+  margin-top: 10px;
+  color: var(--hot);
+  font-weight: 700;
+  transition: .25s;
+}
+
+/* Make the proposal card react */
+.wedding-card {
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.wedding-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 85px #ed5f9630;
+}
+
+@media(max-width:700px) {
+  .wedding-buttons {
+    height: 230px;
+  }
+}
+
 
 </style>
 </head>
@@ -152,10 +273,58 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
 <div class="card"><div class="emoji">🥰</div><strong>The way you are</strong><p>No explanation needed.</p></div>
 <div class="card"><div class="emoji">❤️</div><strong>Us</strong><p>My favorite part.</p></div>
 </div>
-<button class="primary" style="margin-top:30px" onclick="go('surprise')">I have one more thing… 🎁</button>
+<button class="primary" style="margin-top:30px" onclick="go('wedding')">
+  Wait… there's BIG news 👀💍
+</button>
 </div>
 </section>
+<section class="wedding" id="wedding">
+  <div class="proposal-heart ph1">💗</div>
+  <div class="proposal-heart ph2">💍</div>
+  <div class="proposal-heart ph3">✨</div>
+  <div class="proposal-heart ph4">💕</div>
 
+  <div class="container">
+    <div class="wedding-card">
+
+      <div class="wedding-ring">💍</div>
+
+      <span class="year">BIG NEWS • 2027</span>
+
+      <h2>So… we're getting married. 🥹❤️</h2>
+
+      <p class="sub">
+        Just a tiny reminder that next year I'm officially upgrading you
+        from <b>my baby</b> to <b>my wife</b>. 😌💍
+      </p>
+
+      <p>
+        Which means I have one very important question...
+      </p>
+
+      <h3 style="font-size:1.7rem;margin-top:25px;">
+        Are you ready to marry me? 🥺
+      </h3>
+
+      <div class="wedding-buttons" id="weddingButtons">
+		<button class="yes-button" onclick="sayYes()">
+			YES! OBVIOUSLY💍❤️
+		</button>
+        <button
+		  class="no-button"
+		  id="noButton"
+		  type="button"
+		>
+		  Trying to say no? 😏
+		</button>
+
+      </div>
+
+      <div class="wedding-result" id="weddingResult"></div>
+
+    </div>
+  </div>
+</section>
 <section class="surprise" id="surprise">
 <div class="container">
 <h2>Okay… actual surprise time. 🎁</h2>
@@ -179,29 +348,73 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
 <p>Happy birthday to the girl who somehow manages to be cute, annoying, funny, dramatic and completely irresistible — sometimes all at the same time. 😂</p>
 <p>I hope this year brings you everything you're wishing for, and a ridiculous amount of happiness. I hope you keep smiling that smile, keep being your crazy self, and keep letting me be a part of your little world.</p>
 <p>And if I get to make even a tiny contribution to those smiles, I'll consider myself pretty lucky.</p>
-<p>So here's to you, to us, to all the memories we've already made, and to all the ones we haven't made yet. ❤️</p>
+<p>So here's to you, to us, to all the memories we've already made, and to all the ones we haven't made yet❤️</p>
 <p class="signature">Happy Birthday, baby. 🫶</p>
 </div>
-<p>Now stop scrolling and come get your birthday hug. 🫂</p>
+<p>Now stop scrolling and come get your birthday hug🫂</p>
 </div>
 </section>
 
-<footer>Made with an unreasonable amount of love ❤️</footer>
+<footer>Made with an unreasonable amount of love❤️</footer>
 
 <script>
-function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth'}); burst();}
-function answer(msg){document.getElementById('reply').textContent=msg; burst(12);}
-function openGift(){document.getElementById('gift').classList.add('open');document.getElementById('giftNote').classList.add('show');burst(35);}
-function burst(n=18){
- const box=document.getElementById('hearts');
- const emojis=['❤️','💗','💕','✨','🎀','🥰','🌷'];
- for(let i=0;i<n;i++){
-  const h=document.createElement('div');h.className='heart';h.textContent=emojis[Math.floor(Math.random()*emojis.length)];
-  h.style.left=Math.random()*100+'vw';h.style.top=(-5-Math.random()*15)+'vh';
-  h.style.animationDelay=Math.random()*.6+'s';h.style.fontSize=(16+Math.random()*22)+'px';
-  box.appendChild(h);setTimeout(()=>h.remove(),3200);
- }
+function go(id) {
+  const target = document.getElementById(id);
+
+  if (!target) return;
+
+  target.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+
+  burst();
 }
+
+function answer(msg) {
+  document.getElementById('reply').textContent = msg;
+  burst(12);
+}
+
+function openGift() {
+  document.getElementById('gift').classList.add('open');
+  document.getElementById('giftNote').classList.add('show');
+  burst(35);
+}
+
+function burst(n = 18) {
+  const box = document.getElementById('hearts');
+
+  const emojis = [
+    '❤️',
+    '💗',
+    '💕',
+    '✨',
+    '🎀',
+    '🥰',
+    '🌷'
+  ];
+
+  for (let i = 0; i < n; i++) {
+    const h = document.createElement('div');
+
+    h.className = 'heart';
+    h.textContent =
+      emojis[Math.floor(Math.random() * emojis.length)];
+
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.top = (-5 - Math.random() * 15) + 'vh';
+    h.style.animationDelay = Math.random() * 0.6 + 's';
+    h.style.fontSize = (16 + Math.random() * 22) + 'px';
+
+    box.appendChild(h);
+
+    setTimeout(() => {
+      h.remove();
+    }, 3200);
+  }
+}
+
 const song=document.getElementById('birthdaySong');
 const musicBtn=document.getElementById('musicBtn');
 const opening=document.getElementById('opening');
@@ -232,6 +445,166 @@ musicBtn.addEventListener('click',async()=>{
  }
 });
 window.addEventListener('load',()=>setTimeout(()=>burst(12),500));
+
+const noButton = document.getElementById('noButton');
+const weddingButtons = document.getElementById('weddingButtons');
+const weddingResult = document.getElementById('weddingResult');
+
+let noAttempts = 0;
+let lastMove = 0;
+
+const teasingMessages = [
+  "HEY! Where are you going? 😂",
+  "Nice try, baby. 😏",
+  "That button doesn't work. Suspicious... 👀",
+  "You're really trying to escape marriage? 😭",
+  "The NO button is shy. 🥺",
+  "Almost! ...actually, not even close. 😂",
+  "Why are you chasing it?! 😭💨",
+  "The button has chosen YES. 💍",
+  "Okay fine, I'll just keep moving it. 😌",
+  "JUST SAY YES ALREADY. ❤️"
+];
+
+/* Move BEFORE she gets a chance to click */
+function dodgeButton() {
+
+  const now = Date.now();
+
+  /* Prevent multiple mouse events firing together */
+  if (now - lastMove < 120) return;
+
+  lastMove = now;
+  noAttempts++;
+
+  const container = weddingButtons.getBoundingClientRect();
+  const button = noButton.getBoundingClientRect();
+
+  const padding = 10;
+
+  const maxX =
+    (container.width - button.width) / 2 - padding;
+
+  const maxY =
+    (container.height - button.height) / 2 - padding;
+
+  /*
+   * Keep the button away from the YES button.
+   * Random positions are generated until one is
+   * reasonably far away.
+   */
+  let x, y;
+
+  for (let i = 0; i < 20; i++) {
+
+    x = (Math.random() * 2 - 1) * maxX;
+    y = (Math.random() * 2 - 1) * maxY;
+
+    /* Don't put NO directly over YES */
+    if (Math.abs(x) > 70 || Math.abs(y) > 45) {
+      break;
+    }
+  }
+
+  noButton.style.left = `calc(50% + ${x}px)`;
+  noButton.style.top = `calc(50% + ${y}px)`;
+
+  noButton.classList.remove('running');
+
+  /* Restart animation */
+  void noButton.offsetWidth;
+
+  noButton.classList.add('running');
+
+  weddingResult.textContent =
+    teasingMessages[
+      Math.min(noAttempts - 1, teasingMessages.length - 1)
+    ];
+
+  /* Tiny heart burst */
+  burst(noAttempts % 3 === 0 ? 12 : 5);
+}
+
+
+/*
+ * Desktop:
+ * As soon as the cursor enters the button,
+ * it runs away.
+ */
+noButton.addEventListener('mouseenter', dodgeButton);
+
+
+/*
+ * Extra challenge:
+ * If the cursor gets VERY close to it,
+ * move it again.
+ */
+weddingButtons.addEventListener('mousemove', (event) => {
+
+  const buttonRect = noButton.getBoundingClientRect();
+
+  const distanceX =
+    event.clientX -
+    (buttonRect.left + buttonRect.width / 2);
+
+  const distanceY =
+    event.clientY -
+    (buttonRect.top + buttonRect.height / 2);
+
+  const distance = Math.sqrt(
+    distanceX * distanceX +
+    distanceY * distanceY
+  );
+
+  if (distance < 65) {
+    dodgeButton();
+  }
+});
+
+
+/*
+ * Mobile:
+ * Touching the button makes it escape.
+ */
+noButton.addEventListener(
+  'touchstart',
+  (event) => {
+    event.preventDefault();
+    dodgeButton();
+  },
+  { passive: false }
+);
+
+
+/*
+ * Just in case she somehow manages to click it.
+ */
+noButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  dodgeButton();
+});
+
+
+/* YES button */
+function sayYes() {
+
+  weddingResult.innerHTML =
+    "I KNEW IT! 🥹💍❤️ Future wife unlocked!";
+
+  noButton.style.display = 'none';
+
+  burst(60);
+
+  /* Make the YES button celebrate */
+  const yesButton =
+    document.querySelector('.yes-button');
+
+  yesButton.style.transform = 'scale(1.2)';
+
+  setTimeout(() => {
+    go('surprise');
+  }, 1600);
+}
 </script>
 </body>
 </html>
