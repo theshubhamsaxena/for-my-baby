@@ -7,19 +7,19 @@
 <meta name="theme-color" content="#ff6fae">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Pacifico&display=swap');
-:root{--pink:#ff6fae;--hot:#ff3f8e;--cream:#fff8fb;--ink:#351c2a;--soft:#ffe5f0}
+:root{--pink:#f59abb;--hot:#ed5f96;--cream:#fffaf7;--ink:#3b2630;--soft:#ffe9f1;--rose:#fff1f5;--gold:#f2c98b}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--cream);color:var(--ink);font-family:"DM Sans",sans-serif;overflow-x:hidden}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:"DM Sans",sans-serif;overflow-x:hidden;letter-spacing:.01em}
 button{font:inherit;cursor:pointer;border:0}
-section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:70px 20px;position:relative}
+section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:90px 20px;position:relative}
 .container{width:min(100%,1000px);margin:auto;text-align:center}
-.hero{background:radial-gradient(circle at 50% 25%,#fff 0,#fff0f6 38%,#ffd9e9 100%);overflow:hidden}
+.hero{background:radial-gradient(circle at 50% 20%,#fff 0,#fff5f8 32%,#ffe0eb 72%,#ffd2e3 100%);overflow:hidden}
 .badge{display:inline-block;background:white;padding:9px 16px;border-radius:999px;box-shadow:0 8px 30px #ff77ab30;font-weight:700;font-size:.85rem}
-h1{font-family:Pacifico,cursive;font-size:clamp(3rem,10vw,7rem);line-height:1.05;margin:22px 0 10px;color:var(--hot)}
+h1{font-family:Pacifico,cursive;font-size:clamp(3.2rem,10vw,7rem);line-height:1.05;margin:22px 0 10px;color:var(--hot);text-shadow:0 8px 30px #ed5f9620}
 h2{font-size:clamp(2rem,5vw,3.4rem);margin:0 0 14px}
 p{font-size:1.08rem;line-height:1.7}
 .sub{max-width:650px;margin:0 auto 28px}
-.primary,.secondary{padding:15px 24px;border-radius:999px;font-weight:700;transition:.2s;box-shadow:0 10px 25px #ff3f8e25}
+.primary,.secondary{padding:15px 24px;border-radius:999px;font-weight:700;transition:.25s;box-shadow:0 10px 25px #ed5f9620}
 .primary{background:var(--hot);color:white}.secondary{background:white;color:var(--hot)}
 .primary:hover,.secondary:hover{transform:translateY(-3px)}
 .floating{position:absolute;animation:float 4s ease-in-out infinite;font-size:2rem;opacity:.8}
@@ -52,9 +52,41 @@ p{font-size:1.08rem;line-height:1.7}
 .music{position:fixed;right:18px;bottom:18px;z-index:10;background:white;color:var(--hot);width:48px;height:48px;border-radius:50%;box-shadow:0 8px 25px #0002;font-size:1.2rem}
 footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size:.85rem}
 @media(max-width:700px){.cardgrid,.photo-grid{grid-template-columns:1fr}.card{min-height:150px}.letterbox{padding:24px}section{padding:65px 16px}.floating{font-size:1.5rem}}
+
+.opening{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(145deg,#fff8fb,#ffe5ef);transition:opacity .7s,visibility .7s}
+.opening.hide{opacity:0;visibility:hidden;pointer-events:none}
+.opening-card{width:min(92vw,560px);padding:42px 28px;text-align:center;background:#ffffffdd;border:1px solid #ffffff;box-shadow:0 25px 80px #8f36571f;border-radius:36px;backdrop-filter:blur(10px)}
+.opening-kicker{font-size:.85rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#b86b88}
+.opening-card h2{font-family:Pacifico,cursive;font-size:clamp(2.3rem,8vw,4.2rem);color:var(--hot);margin:14px 0 8px}
+.opening-card p{max-width:430px;margin:0 auto 24px;color:#684653}
+.start-love{background:var(--hot);color:#fff;padding:16px 28px;border-radius:999px;font-weight:700;box-shadow:0 12px 30px #ed5f9630}
+.song-note{display:block;margin-top:14px;font-size:.78rem;color:#9b7180}
+.sparkle{display:inline-block;animation:twinkle 1.8s ease-in-out infinite}
+@keyframes twinkle{50%{transform:scale(1.18) rotate(8deg);opacity:.65}}
+.hero .container{animation:heroIn 1s ease both}
+@keyframes heroIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+.card{border:1px solid #f8e1e8}
+.music{transition:.25s}
+.music.playing{background:var(--hot);color:white;transform:scale(1.05)}
+.music::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid #ed5f9630;animation:musicPulse 2s infinite}
+@keyframes musicPulse{50%{transform:scale(1.12);opacity:.3}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+
 </style>
 </head>
 <body>
+<div class="opening" id="opening">
+  <div class="opening-card">
+    <div class="opening-kicker"><span class="sparkle">✦</span> a tiny birthday surprise <span class="sparkle">✦</span></div>
+    <h2>For my favorite girl 💗</h2>
+    <p>I made you a little corner of the internet.<br>There is a song waiting for you too. 🎶</p>
+    <button class="start-love" id="startLove">Open your surprise ♡</button>
+    <span class="song-note">🎵 Until I Found You — Stephen Sanchez</span>
+  </div>
+</div>
+<audio id="birthdaySong" preload="auto" loop>
+  <source src="until-i-found-you.mp3" type="audio/mpeg">
+</audio>
 <div id="hearts"></div>
 <button class="music" id="musicBtn" aria-label="Toggle music">♫</button>
 
@@ -63,7 +95,7 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
 <div class="container">
 <div class="badge">A tiny internet corner made just for you 🥺</div>
 <h1>Happy Birthday,<br>Baby ❤️</h1>
-<p class="sub">I could have bought you a gift. Instead, I spent way too much time making this little thing. So yes… you have to explore all of it. 😌</p>
+<p class="sub">I could have bought you a gift. Instead, I made you a tiny world of our own. So yes… you have to explore every little corner. 😌💗</p>
 <button class="primary" onclick="go('story')">Start the birthday adventure →</button>
 </div>
 </section>
@@ -97,7 +129,7 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
 
 <section class="memories" id="memories">
 <div class="container">
-<h2>Evidence that you're my favorite human 📸</h2>
+<h2>A few reasons you have my whole heart 📸</h2>
 <p class="sub">Replace these three placeholders with your favorite pictures of her/us.</p>
 <div class="photo-grid">
 <div class="photo" style="--r:-2deg"><div class="placeholder"><span>📷</span><b>YOUR PHOTO 1</b><small>Add: photo1.jpg</small></div><div class="caption">“Look at my baby 😭❤️”</div></div>
@@ -110,7 +142,7 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
 
 <section class="story" id="reasons">
 <div class="container">
-<h2>Things I secretly love about you 💗</h2>
+<h2>Little things I adore about you 💗</h2>
 <p class="sub">Okay, fine. They're not really secret.</p>
 <div class="cardgrid">
 <div class="card"><div class="emoji">😊</div><strong>Your smile</strong><p>It can change my entire mood.</p></div>
@@ -132,8 +164,8 @@ footer{padding:25px;text-align:center;background:#2c1824;color:#cba9b8;font-size
 <div class="lid"></div><div class="box"></div><div class="ribbon-v"></div><div class="ribbon-h"></div>
 </div>
 <div class="gift-note" id="giftNote">
-<h3>Fine. You caught me. 🥹</h3>
-<p>I just wanted an excuse to remind you how special you are to me.</p>
+<h3>Okay… you found it. 🥹💗</h3>
+<p>I just wanted an excuse to remind you that you are, very inconveniently, one of my favorite people in the entire universe.</p>
 <button class="primary" onclick="go('letter')">One last thing ❤️</button>
 </div>
 </div>
@@ -162,7 +194,7 @@ function answer(msg){document.getElementById('reply').textContent=msg; burst(12)
 function openGift(){document.getElementById('gift').classList.add('open');document.getElementById('giftNote').classList.add('show');burst(35);}
 function burst(n=18){
  const box=document.getElementById('hearts');
- const emojis=['❤️','💗','💕','✨','🎀','🥰'];
+ const emojis=['❤️','💗','💕','✨','🎀','🥰','🌷'];
  for(let i=0;i<n;i++){
   const h=document.createElement('div');h.className='heart';h.textContent=emojis[Math.floor(Math.random()*emojis.length)];
   h.style.left=Math.random()*100+'vw';h.style.top=(-5-Math.random()*15)+'vh';
@@ -170,20 +202,35 @@ function burst(n=18){
   box.appendChild(h);setTimeout(()=>h.remove(),3200);
  }
 }
-let audioCtx=null,playing=false;
-document.getElementById('musicBtn').onclick=()=>{
- if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)();
- playing=!playing; document.getElementById('musicBtn').textContent=playing?'❚❚':'♫';
- if(playing) playMelody();
-};
-function playMelody(){
- if(!playing)return;
- const notes=[261.63,329.63,392,329.63,293.66,349.23,440,392];
- const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.connect(g);g.connect(audioCtx.destination);
- o.type='sine';let t=audioCtx.currentTime;
- notes.forEach((f,i)=>{o.frequency.setValueAtTime(f,t+i*.25);g.gain.setValueAtTime(.0001,t+i*.25);g.gain.exponentialRampToValueAtTime(.045,t+i*.25+.02);g.gain.exponentialRampToValueAtTime(.0001,t+i*.25+.22)});
- o.start();o.stop(t+2);setTimeout(playMelody,2000);
+const song=document.getElementById('birthdaySong');
+const musicBtn=document.getElementById('musicBtn');
+const opening=document.getElementById('opening');
+const startLove=document.getElementById('startLove');
+
+async function startMusic(){
+ try{
+  await song.play();
+  musicBtn.classList.add('playing');
+  musicBtn.textContent='❚❚';
+  musicBtn.setAttribute('aria-label','Pause music');
+ }catch(e){
+  musicBtn.textContent='♫';
+ }
 }
+startLove.addEventListener('click',async()=>{
+ opening.classList.add('hide');
+ burst(28);
+ await startMusic();
+});
+musicBtn.addEventListener('click',async()=>{
+ if(song.paused){await startMusic();}
+ else{
+  song.pause();
+  musicBtn.classList.remove('playing');
+  musicBtn.textContent='♫';
+  musicBtn.setAttribute('aria-label','Play music');
+ }
+});
 window.addEventListener('load',()=>setTimeout(()=>burst(12),500));
 </script>
 </body>
